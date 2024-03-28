@@ -8,16 +8,14 @@
 #include "gd32w515p_eval.h"
 
 /* private variables */
-static uint32_t GPIO_PORT[LEDn] = {LED1_GPIO_PORT, LED2_GPIO_PORT,
-                                   LED3_GPIO_PORT};
-static uint32_t GPIO_PIN[LEDn] = {LED1_PIN, LED2_PIN, LED3_PIN};
+static uint32_t GPIO_PORT[LEDn] = {LED1_GPIO_PORT, LED2_GPIO_PORT, LED3_GPIO_PORT, SMK_IRF_GPIO_PORT, SMK_UVF_GPIO_PORT, SMK_IRB_GPIO_PORT};
+static uint32_t GPIO_PIN[LEDn] = {LED1_PIN, LED2_PIN, LED3_PIN, SMK_IRF_PIN, SMK_UVF_PIN, SMK_IRB_PIN};
 
 static rcu_periph_enum COM_CLK[COMn] = {EVAL_COM0_CLK};
 static uint32_t COM_TX_PIN[COMn] = {EVAL_COM0_TX_PIN};
 static uint32_t COM_RX_PIN[COMn] = {EVAL_COM0_RX_PIN};
 
-static rcu_periph_enum GPIO_CLK[LEDn] = {LED1_GPIO_CLK, LED2_GPIO_CLK,
-                                         LED3_GPIO_CLK};
+static rcu_periph_enum GPIO_CLK[LEDn] = {LED1_GPIO_CLK, LED2_GPIO_CLK, LED3_GPIO_CLK, SMK_IRF_GPIO_CLK, SMK_UVF_GPIO_CLK, SMK_IRB_GPIO_CLK};
 
 static uint32_t KEY_PORT[KEYn] = {TAMPER_WAKEUP_KEY_GPIO_PORT};
 static uint32_t KEY_PIN[KEYn] = {TAMPER_WAKEUP_KEY_PIN};
@@ -27,15 +25,6 @@ static uint8_t KEY_PORT_SOURCE[KEYn] = {TAMPER_WAKEUP_KEY_EXTI_PORT_SOURCE};
 static uint8_t KEY_PIN_SOURCE[KEYn] = {TAMPER_WAKEUP_KEY_EXTI_PIN_SOURCE};
 static IRQn_Type KEY_IRQn[KEYn] = {TAMPER_WAKEUP_KEY_EXTI_IRQn};
 
-/*!
-    \brief      configure led GPIO
-    \param[in]  lednum: specify the Led to be configured
-      \arg        LED1
-      \arg        LED2
-      \arg        LED3
-    \param[out] none
-    \retval     none
-*/
 void gd_eval_led_init(led_typedef_enum lednum)
 {
     /* enable the led clock */

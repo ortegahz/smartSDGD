@@ -23,6 +23,9 @@ extern "C"
         LED1 = 0,
         LED2 = 1,
         LED3 = 2,
+        SMK_IRF = 3,
+        SMK_UVF = 4,
+        SMK_IRB = 5
     } led_typedef_enum;
 
     typedef enum
@@ -36,8 +39,23 @@ extern "C"
         KEY_MODE_EXTI = 1
     } keymode_typedef_enum;
 
+/* smoke red forward [SMK-IR2 <--> PC4] */
+#define SMK_IRF_PIN GPIO_PIN_4
+#define SMK_IRF_GPIO_PORT GPIOC
+#define SMK_IRF_GPIO_CLK RCU_GPIOC
+
+/* smoke blue forward [SMK-UV <--> PA7] */
+#define SMK_UVF_PIN GPIO_PIN_7
+#define SMK_UVF_GPIO_PORT GPIOA
+#define SMK_UVF_GPIO_CLK RCU_GPIOA
+
+/* smoke red backward [SMK-IR1 <--> PC5] */
+#define SMK_IRB_PIN GPIO_PIN_5
+#define SMK_IRB_GPIO_PORT GPIOC
+#define SMK_IRB_GPIO_CLK RCU_GPIOC
+
 /* eval board low layer led */
-#define LEDn 3U
+#define LEDn 6U
 
 #define LED1_PIN GPIO_PIN_7
 #define LED1_GPIO_PORT GPIOC
