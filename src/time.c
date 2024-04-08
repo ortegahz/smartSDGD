@@ -2,7 +2,7 @@
  * @Author: manu zxthz@126.com
  * @Date: 2024-03-28 16:38:32
  * @LastEditors: manu zxthz@126.com
- * @LastEditTime: 2024-04-07 13:14:16
+ * @LastEditTime: 2024-04-08 09:50:56
  * @FilePath: /smartSDGD/src/time.c
  * @Description:
  */
@@ -10,13 +10,7 @@
 #include "time.h"
 #include "gd32w51x.h"
 
-/*!
-    \brief      TIMER configuration function
-    \param[in]  none
-    \param[out] none
-    \retval     none
-*/
-void timer_config(void)
+static void timer_config_adc_trigge(void)
 {
     timer_oc_parameter_struct timer_ocintpara;
     timer_parameter_struct timer_initpara;
@@ -45,4 +39,42 @@ void timer_config(void)
     timer_auto_reload_shadow_enable(TIMER0);
     timer_primary_output_config(TIMER0, ENABLE);
     timer_enable(TIMER0);
+}
+
+static void timer_config_smoke_sample(void)
+{
+    /* ----------------------------------------------------------------------------
+    TIMER2 Configuration:
+    TIMER2CLK = SystemCoreClock/9000 = 20KHz.
+    TIMER2 configuration is timing mode, and the timing is 1s(20000/20000 = 1s).
+    ---------------------------------------------------------------------------- */
+    timer_parameter_struct timer_initpara;
+
+    /* enable the peripherals clock */
+    rcu_timer_clock_prescaler_config(RCU_TIMER_PSC_MUL4);
+    rcu_periph_clock_enable(RCU_TIMER2);
+
+    /* deinit a TIMER */
+    timer_deinit(TIMER2);
+    /* initialize TIMER init parameter struct */
+    timer_struct_para_init(&timer_initpara);
+    /* TIMER2 configuration */
+    timer_initpara.prescaler = 8999;
+    timer_initpara.alignedmode = TIMER_COUNTER_EDGE;
+    timer_initpara.counterdirection = TIMER_COUNTER_UP;
+    timer_initpara.period = 20000;
+    timer_initpara.clockdivision = TIMER_CKDIV_DIV1;
+    timer_init(TIMER2, &timer_initpara);
+
+    /* clear interrupt bit */
+    timer_interrupt_flag_clear(TIMER2, TIMER_INT_FLAG_UP);
+    /* enable the TIMER interrupt */
+    timer_interrupt_enable(TIMER2, TIMER_INT_UP);
+    /* enable a TIMER */
+    timer_enable(TIMER2);
+}
+
+void timer_config(void)
+{
+    timer_config_smoke_sample();
 }
