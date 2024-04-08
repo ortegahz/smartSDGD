@@ -2,7 +2,7 @@
  * @Author: manu zxthz@126.com
  * @Date: 2024-03-28 16:38:32
  * @LastEditors: manu zxthz@126.com
- * @LastEditTime: 2024-04-08 15:27:51
+ * @LastEditTime: 2024-04-08 16:44:55
  * @FilePath: /smartSDGD/src/gpio.c
  * @Description: ����Ĭ������,������`customMade`, ��koroFileHeader�鿴���� ��������: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -67,12 +67,14 @@ void flash_smoke_transmitter(void)
     gd_eval_led_on(SMK_IRF);
     // delay_1ms(timeDelay);
     delay_xms(timeDelay);
-    printf("irf on result is %d \n", adc_value);
+    // printf("irf on result is %d \n", g_adcValue);
+    g_irfValue = g_adcValue;
 
     gd_eval_led_on(SMK_UVF);
     // delay_1ms(timeDelay);
     delay_xms(timeDelay);
-    printf("uvf on result is %d \n", adc_value);
+    // printf("uvf on result is %d \n", g_adcValue);
+    g_uvfValue = g_adcValue;
 
     // gd_eval_led_on(SMK_IRB);
 
@@ -82,8 +84,10 @@ void flash_smoke_transmitter(void)
     // gd_eval_led_off(SMK_IRB);
     // delay_1ms(timeDelay);
     delay_xms(timeDelay);
+    // printf("off result is %d \n", g_adcValue);
+    g_darkValue = g_adcValue;
 
-    printf("off result is %d \n", adc_value);
+    printf("\n\r[PARSER] %d, %d, %d # irf, uvf, dark\n\r", g_irfValue, g_uvfValue, g_darkValue);
 }
 
 void gpio_config(void)

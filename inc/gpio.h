@@ -2,7 +2,7 @@
  * @Author: manu zxthz@126.com
  * @Date: 2024-03-28 16:35:02
  * @LastEditors: manu zxthz@126.com
- * @LastEditTime: 2024-04-07 14:24:45
+ * @LastEditTime: 2024-04-08 16:32:50
  * @FilePath:
  * @Description:
  */
@@ -11,8 +11,7 @@
 
 #include "gd32w515p_eval.h"
 #include "systick.h"
-
-extern uint16_t adc_value;
+#include "main.h"
 
 void smoke_control_init(void);
 void test_status_led_init(void);

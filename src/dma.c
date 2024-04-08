@@ -2,7 +2,7 @@
  * @Author: manu zxthz@126.com
  * @Date: 2024-03-28 16:38:32
  * @LastEditors: manu zxthz@126.com
- * @LastEditTime: 2024-04-07 10:57:43
+ * @LastEditTime: 2024-04-08 16:41:22
  * @FilePath: /smartSDGD/src/gpio.c
  * @Description:
  */
@@ -26,7 +26,7 @@ void dma_config(void)
     /* initialize DMA single data mode */
     dma_single_data_parameter.periph_addr         = (uint32_t)(&ADC_RDATA);
     dma_single_data_parameter.periph_inc          = DMA_PERIPH_INCREASE_DISABLE;
-    dma_single_data_parameter.memory0_addr        = (uint32_t)(&adc_value);
+    dma_single_data_parameter.memory0_addr        = (uint32_t)(&g_adcValue);
     dma_single_data_parameter.memory_inc          = DMA_MEMORY_INCREASE_DISABLE;
     dma_single_data_parameter.periph_memory_width = DMA_PERIPH_WIDTH_16BIT;
     dma_single_data_parameter.direction           = DMA_PERIPH_TO_MEMORY;

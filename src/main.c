@@ -2,21 +2,14 @@
  * @Author: manu zxthz@126.com
  * @Date: 2024-03-28 15:18:22
  * @LastEditors: manu zxthz@126.com
- * @LastEditTime: 2024-04-08 15:35:29
+ * @LastEditTime: 2024-04-08 16:41:03
  * @FilePath: /smartSDGD/src/main.c
  * @Description: main
  */
 
-#include "gd32w51x.h"
-#include "gd32w515p_eval.h"
-#include "gpio.h"
-#include "rcu.h"
-#include "adc.h"
-#include "dma.h"
-#include "time.h"
-#include "nvic.h"
+#include "main.h"
 
-uint16_t adc_value;
+uint16_t g_adcValue, g_irfValue, g_uvfValue, g_darkValue;
 
 int main(void)
 {
@@ -37,6 +30,6 @@ int main(void)
     {
         // flash_smoke_transmitter();
         // delay_1ms(1000);
-        // printf("off result is %d \n", adc_value);
+        // printf("off result is %d \n", g_adcValue);
     }
 }
