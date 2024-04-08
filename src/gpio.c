@@ -2,7 +2,7 @@
  * @Author: manu zxthz@126.com
  * @Date: 2024-03-28 16:38:32
  * @LastEditors: manu zxthz@126.com
- * @LastEditTime: 2024-04-08 16:44:55
+ * @LastEditTime: 2024-04-08 18:43:16
  * @FilePath: /smartSDGD/src/gpio.c
  * @Description: ����Ĭ������,������`customMade`, ��koroFileHeader�鿴���� ��������: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -59,32 +59,25 @@ static void delay_xms(uint32_t n)
 
 void flash_smoke_transmitter(void)
 {
-    uint32_t timeDelay = 1 << 14;
+    uint32_t timeDelaySampleLight = 1 << 10;
+    uint32_t timeDelaySampleDark = 1 << 14;
 
-    // delay_1ms(2000);
-
-    /* turn on LEDs */
     gd_eval_led_on(SMK_IRF);
-    // delay_1ms(timeDelay);
-    delay_xms(timeDelay);
-    // printf("irf on result is %d \n", g_adcValue);
+    delay_xms(timeDelaySampleLight);
     g_irfValue = g_adcValue;
+    gd_eval_led_off(SMK_IRF);
 
     gd_eval_led_on(SMK_UVF);
-    // delay_1ms(timeDelay);
-    delay_xms(timeDelay);
-    // printf("uvf on result is %d \n", g_adcValue);
+    delay_xms(timeDelaySampleLight);
     g_uvfValue = g_adcValue;
+    gd_eval_led_off(SMK_UVF);
 
     // gd_eval_led_on(SMK_IRB);
-
-    /* turn off LEDs */
-    gd_eval_led_off(SMK_IRF);
-    gd_eval_led_off(SMK_UVF);
     // gd_eval_led_off(SMK_IRB);
-    // delay_1ms(timeDelay);
-    delay_xms(timeDelay);
-    // printf("off result is %d \n", g_adcValue);
+
+    // gd_eval_led_off(SMK_IRF);
+    // gd_eval_led_off(SMK_UVF);
+    delay_xms(timeDelaySampleDark);
     g_darkValue = g_adcValue;
 
     printf("\n\r[PARSER] %d, %d, %d # irf, uvf, dark\n\r", g_irfValue, g_uvfValue, g_darkValue);
