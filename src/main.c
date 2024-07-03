@@ -9,7 +9,7 @@
 
 #include "main.h"
 
-uint16_t g_adcValue, g_irfValue, g_uvfValue, g_darkValue;
+uint16_t g_adcValue, g_irfValue, g_uvfValue, g_irbValue, g_darkValue;
 
 int main(void)
 {

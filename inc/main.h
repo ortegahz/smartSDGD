@@ -18,6 +18,6 @@
 #include "time.h"
 #include "nvic.h"
 
-extern uint16_t g_adcValue, g_irfValue, g_uvfValue, g_darkValue;
+extern uint16_t g_adcValue, g_irfValue, g_uvfValue, g_irbValue, g_darkValue;
 
 #endif

@@ -59,7 +59,7 @@ static void delay_xms(uint32_t n)
 
 void flash_smoke_transmitter(void)
 {
-    uint32_t timeDelaySampleLight = 1 << 10;
+    uint32_t timeDelaySampleLight = 1 << 14;
     uint32_t timeDelaySampleDark = 1 << 14;
 
     gd_eval_led_on(SMK_IRF);
@@ -72,15 +72,15 @@ void flash_smoke_transmitter(void)
     g_uvfValue = g_adcValue;
     gd_eval_led_off(SMK_UVF);
 
-    // gd_eval_led_on(SMK_IRB);
-    // gd_eval_led_off(SMK_IRB);
+    gd_eval_led_on(SMK_IRB);
+    delay_xms(timeDelaySampleLight);
+    g_irbValue = g_adcValue;
+    gd_eval_led_off(SMK_IRB);
 
-    // gd_eval_led_off(SMK_IRF);
-    // gd_eval_led_off(SMK_UVF);
     delay_xms(timeDelaySampleDark);
     g_darkValue = g_adcValue;
 
-    printf("\n\r[PARSER] %d, %d, %d # irf, uvf, dark\n\r", g_irfValue, g_uvfValue, g_darkValue);
+    printf("\n\r[PARSER] %d, %d, %d, %d # irf, uvf, irb, dark\n\r", g_irfValue, g_uvfValue, g_irbValue, g_darkValue);
 }
 
 void gpio_config(void)
