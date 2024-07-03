@@ -11,4 +11,8 @@ uvision/Objects/
 
 uvision/
 
+project/Objects/
+project/Listings/
+project/RTE
+
 \.vscode/
