@@ -46,7 +46,7 @@ static void timer_config_smoke_sample(void)
     /* ----------------------------------------------------------------------------
     TIMER2 Configuration:
     TIMER2CLK = SystemCoreClock/9000 = 20KHz.
-    TIMER2 configuration is timing mode, and the timing is 1s(20000/20000 = 1s).
+    TIMER2 configuration is timing mode, and the timing is timer_initpara.period/20000 s.
     ---------------------------------------------------------------------------- */
     timer_parameter_struct timer_initpara;
 
@@ -62,7 +62,7 @@ static void timer_config_smoke_sample(void)
     timer_initpara.prescaler = 8999;
     timer_initpara.alignedmode = TIMER_COUNTER_EDGE;
     timer_initpara.counterdirection = TIMER_COUNTER_UP;
-    timer_initpara.period = 20000;
+    timer_initpara.period = 1000;
     timer_initpara.clockdivision = TIMER_CKDIV_DIV1;
     timer_init(TIMER2, &timer_initpara);
 
